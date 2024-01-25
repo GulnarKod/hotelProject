@@ -1,16 +1,22 @@
 import React from "react";
-import {redirect} from 'react-router-dom'
-import LoginForm from './loginForm';
+import {Navigate} from 'react-router-dom'
+import {useDispatch} from "react-redux";
+import{logoutUser} from '../slice/authSlice';
+import useAuth from '../hooks/use-auth'
 const Homepage=()=>{
-    return(
+    const dispatch=useDispatch();
+    const handleLogOut=()=>{
+        dispatch(logoutUser());}
+ const {isAuth}=useAuth();
+    return isAuth? (
+       
         <div>
-            <redirect to='loginForm'/>
-        <LoginForm/>
+            <button onClick={handleLogOut}>Logout</button>
+            
         </div>
        
-    )
+    ):(<Navigate to='/loginForm' />)
 }
-// import React from 'react';
 // import { Layout, Flex } from 'antd';
 // const { Header, Footer, Sider, Content } = Layout;
 // const headerStyle = {

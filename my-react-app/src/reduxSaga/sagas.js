@@ -1,4 +1,11 @@
+export function* workerSaga(){
 
-export default function* rootSaga() {
- 
 }
+export function* watchClickSaga(){
+
+};
+function*  rootSaga(){
+
+yield watchClickSaga();
+}
+export default rootSaga;

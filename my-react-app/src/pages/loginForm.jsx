@@ -1,18 +1,45 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setUserSuccess } from '../slice/authSlice';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {useNavigate } from 'react-router-dom';
 
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [checked, setChecked] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const[error, setError]=useState('')
+  const dispatch = useDispatch();
 
-const LoginForm = ({handleClick}) => {
-  const[username,setUsername]=useState('');
-  const[password,setPassword]=useState('');
-  // const[checked,setChecked]=useState(false);
-  // const onFinish = (values) => {
-  //   console.log('Success:', values);
-  // };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        dispatch(setUserSuccess({
+          email: user.email,
+          token: user.accessToken,
+          id: user.uid,
+        }));
+        setIsLoggedIn(true); // Устанавливаем флаг авторизации в true
+      })
+      .catch(error => {
+        console.error('Login failed:', error);
+        setError('Email ili parol vveden nepravilno.Poprobuyte ewe raz');
+        setPassword('');
+      });
+  }
+const navigate=useNavigate();
+  if (isLoggedIn) {
+   return navigate(-1);
+  }
   return(
+
   <Form
     name="basic"
     labelCol={{
@@ -26,18 +53,18 @@ const LoginForm = ({handleClick}) => {
       maxWidth: 600,
 
     }}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
+    
   >
+    {error && <p style={{color:'red'}}>{error}</p>}
     <Form.Item
       label="Username"
       name="username"
-      value={username}
-      onChange={(e)=>setUsername(e.target.value)}
+      value={email}
+      onChange={(e)=>setEmail(e.target.value)}
       rules={[
         {
           required: true,
-          message: 'Please input your username!',
+          message: 'Please input your email',
         },
       ]}
     >
@@ -48,7 +75,7 @@ const LoginForm = ({handleClick}) => {
       label="Password"
       name="password"
       value={password}
-      onMetaChange={(e)=>setPassword(e.target.value)}
+      onChange={(e)=>setPassword(e.target.value)}
       rules={[
         {
           required: true,
@@ -61,7 +88,9 @@ const LoginForm = ({handleClick}) => {
 
     <Form.Item
       name="remember"
-      valuePropName='checked'
+     value={checked}
+     onChange={(e)=>setChecked(e.target.value)}
+      
       wrapperCol={{
         offset: 8,
         span: 16,
@@ -76,7 +105,9 @@ const LoginForm = ({handleClick}) => {
         span: 16,
       }}
     >
-      <Button type="primary" htmlType="submit" onClick={handleClick}>
+      <Button type="primary" htmlType="submit" onClick={handleLogin}>
+      
+
         Submit 
       </Button>
     </Form.Item>
