@@ -1,0 +1,53 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+  }
+.header{
+    text-align: 'center';
+    color: '#fff';
+    height: 64px;
+    line-height:64px;
+    background-color:#212343;
+    display: flex;
+    justify-content: space-between;
+    .logo{
+        height:64px;
+        justify-content: flex-start;
+        
+    img{
+        
+        height: 40px;
+        margin-top: 10px;
+        opacity: 0.8;
+        
+    }
+}
+.logOutBtn{
+    img{
+        height: 40px;
+    }
+    .btn{  
+        background-color:#212343;
+        color: aliceblue;
+        border: 0;
+    }
+}
+    
+}
+.content{
+    margin-left:50px;
+    div{
+    Button{
+        background: #05a0c7; /* Синий цвет фона */
+    color: #fff; /* Белый цвет текста */
+    text-align: center;
+    border: none; /* Убираем рамку */
+    border-radius: 0%;
+    margin-top: 20px;
+    margin-right: 20px;
+    
+    }
+}
+    
+}

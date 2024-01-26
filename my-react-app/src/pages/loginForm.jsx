@@ -17,7 +17,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth,email,password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
@@ -31,7 +31,8 @@ const LoginForm = () => {
       .catch(error => {
         console.error('Login failed:', error);
         setError('Email ili parol vveden nepravilno.Poprobuyte ewe raz');
-        setPassword('');
+
+
       });
   }
 const navigate=useNavigate();
@@ -105,9 +106,7 @@ const navigate=useNavigate();
         span: 16,
       }}
     >
-      <Button type="primary" htmlType="submit" onClick={handleLogin}>
-      
-
+se      <Button type="primary" htmlType="submit" onClick={handleLogin}>
         Submit 
       </Button>
     </Form.Item>
