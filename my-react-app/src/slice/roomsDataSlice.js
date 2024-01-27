@@ -2,24 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 const roomsDataSlice=createSlice({
     name:'data',
     initialState:{
-        data: '',
+        data: [],
         loading: false,
-        error: '',
+        error: null,
     },
     reducers:{
         getDataStart:(state)=>{
 state.loading=true;
-state.error='';
+state.error=null;
         },
         getDataSuccess:(state,action)=>{
             state.data=action.payload;
-            state.error='';
+            state.loading=false;
         },
         getDataFailure:(state,action)=>{
-            state.data='';
+            state.data=[];
             state.error=action.payload;
-        }
-    }
+        },
+    },
 });
 export const {getDataStart,getDataSuccess,getDataFailure}=roomsDataSlice.actions;
 export default roomsDataSlice.reducer;

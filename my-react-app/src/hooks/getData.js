@@ -1,11 +1,12 @@
-import { db } from "firebase/database";
-const database=db();
-const reference = database.ref('https://console.firebase.google.com/project/crmanagementsystemproject/firestore/data/~2FRooms');
-reference.on('value',(snapshot)=>{
-    const data=snapshot.val();
-    console.log(data);
+import useSelectior from "antd/es/table/hooks/useSelection";
+import { useDispatch } from "react-redux"
 
-},
-(error)=>{
-    console.error(error);
-})
+const GetData=()=>{
+    const dispatch=useDispatch();
+const { data,loading, error}=useSelectior(state=>state.data);
+return(
+{const getData=data.map((d,index)=>{<Homepage key={index} items={d}/>})}
+
+)
+}
+

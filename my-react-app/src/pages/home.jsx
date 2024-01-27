@@ -1,35 +1,14 @@
 import React from "react";
 import "../scss/main.css"
-import logo from '../logo/logo.png'
 import {Navigate} from 'react-router-dom'
-import {useDispatch} from "react-redux";
-import{logoutUser} from '../slice/authSlice';
-import useAuth from '../hooks/use-auth'
 import { Layout,Button, Checkbox,Carousel,Table } from 'antd';
+import Header from './header'
 
-const { Header,  Content } = Layout;
+const {Content } = Layout;
 const Homepage=()=>{
-
-//     const dispatch=useDispatch();
-//     const handleLogOut=()=>{
-//         dispatch(logoutUser());
-//     }
-//  const {isAuth}=useAuth();
-//  console.log(useAuth());
-    // return isAuth? (
      return(  
     <Layout >
-      <Header className="header" >
-        {/* Header  <button onClick={handleLogOut}>Logout</button> */}
-        <div className="logo">
-        <img src={logo} alt="loqotip"/>
-</div>
-<div className="logOutBtn">
-<img src="#"alt="users photo"/>
-   
-        <button className="btn">Log Out</button>
-            </div> 
-      </Header>
+      <Header/>
       <Content className="content">
         <div>
         <Button type="text">Clear all filters</Button>
@@ -52,7 +31,7 @@ const Homepage=()=>{
       </Content>
     </Layout>
        
-    // ):(<Navigate to='/loginForm'/>)
+   
      )
 }
 
