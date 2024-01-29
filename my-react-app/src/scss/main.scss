@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    text-align: 'center';
+    color: '#fff';
+    height: 64px;
+    line-height: 64px;
+
+    background-color: #212343;
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+        height: 64px;
+        justify-content: flex-start;
+        margin-left: 50px;
+
+        img {
+
+            height: 40px;
+            margin-top: 10px;
+            opacity: 0.8;
+
+        }
+    }
+
+    .logOutBtn {
+        img {
+            height: 40px;
+        }
+
+        .btn {
+            background-color: #212343;
+            color: aliceblue;
+            border: 0;
+            margin-right: 30px;
+            margin-left: 10px;
+        }
+    }
+
+}
+
+.content {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    height: 900px;
+
+    div {
+        Button {
+            background: #05a0c7;
+            /* Синий цвет фона */
+            color: #fff;
+            /* Белый цвет текста */
+            text-align: center;
+            border: none;
+            /* Убираем рамку */
+            border-radius: 0%;
+            margin-top: 20px;
+            margin-right: 20px;
+
+        }
+    }
+
+
+    Table {
+        height: max-content;
+        margin-top: 50px;
+        border-radius: 0;
+
+        Button {
+            background-color: #05a0c7;
+        }
+
+    }
+
+    .ant-pagination {
+        display: flex;
+        justify-content: center;
+
+    }
+}
+.errorPage{
+    text-align: center;
+    margin-top: 15%;
+    p{
+        margin-top: 10px;
+        font-size: 20px;
+    }
+}
+
+Form{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    max-height: 100%;
+    width: max-content;
+    width: 500px;
+    max-width: 100%;
+
+background-color: hsl(236, 54%, 58%);
+.formHeaedr{
+    font-weight: bold; 
+}
+Form.Item{
+    margin-left: 20px;
+}
+}
