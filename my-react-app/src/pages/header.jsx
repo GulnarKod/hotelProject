@@ -1,6 +1,6 @@
 import React from "react";
+import "../scss/main.css";
 import {Navigate} from 'react-router-dom';
-import useAuth from "../hooks/use-auth";
 import { useDispatch } from "react-redux";
 import {logoutUser}from '../slice/authSlice';
 import logo from '../logo/logo.png'
@@ -9,10 +9,9 @@ const Header = () => {
     const handleLogOut = () => {
         dispatch(logoutUser());
     }
-    const { isAuth } = useAuth();
-    console.log(useAuth());
-    return isAuth ? (
-        <Header className="header" >
+    return(
+
+        <header className="header" >
             
             <div className="logo">
                 <img src={logo} alt="loqotip" />
@@ -21,7 +20,7 @@ const Header = () => {
                 <img src="#" alt="users photo" />
                 <button className="btn" onClick={handleLogOut}>Log Out</button>
             </div>
-        </Header>
-    ):(<Navigate to='/loginForm'/>)
+        </header>
+    )
 };
 export default Header;

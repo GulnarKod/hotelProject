@@ -1,4 +1,4 @@
-import{put, call, takeLatest} from 'redux-saga/effects';
+import{put, call, takeEvery} from 'redux-saga/effects';
 import{getDataStart,getDataSuccess, getDataFailure} from '../slice/roomsDataSlice';
 import {db} from '../firebase/firebase';
 export function* fetchData(){
@@ -14,6 +14,6 @@ export function* fetchData(){
 
 function*  dataSaga(){
 
-yield takeLatest('data/fetchDatafromFirestore',fetchData);
+yield takeEvery('data/fetchDatafromFirestore',fetchData);
 }
 export default dataSaga;

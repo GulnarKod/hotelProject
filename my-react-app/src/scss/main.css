@@ -17,6 +17,7 @@
 .header .logo {
   height: 64px;
   justify-content: flex-start;
+  margin-left: 50px;
 }
 .header .logo img {
   height: 40px;
@@ -30,17 +31,68 @@
   background-color: #212343;
   color: aliceblue;
   border: 0;
+  margin-right: 30px;
+  margin-left: 10px;
 }
 
 .content {
   margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 100px;
+  height: 900px;
 }
 .content div Button {
-  background: #05a0c7; /* Синий цвет фона */
-  color: #fff; /* Белый цвет текста */
+  background: #05a0c7;
+  /* Синий цвет фона */
+  color: #fff;
+  /* Белый цвет текста */
   text-align: center;
-  border: none; /* Убираем рамку */
+  border: none;
+  /* Убираем рамку */
   border-radius: 0%;
   margin-top: 20px;
   margin-right: 20px;
+}
+.content Table {
+  height: -moz-max-content;
+  height: max-content;
+  margin-top: 50px;
+  border-radius: 0;
+}
+.content Table Button {
+  background-color: #05a0c7;
+}
+.content .ant-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.errorPage {
+  text-align: center;
+  margin-top: 15%;
+}
+.errorPage p {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+Form {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  max-height: 100%;
+  width: -moz-max-content;
+  width: max-content;
+  width: 500px;
+  max-width: 100%;
+  background-color: hsl(236, 54%, 58%);
+}
+Form .formHeaedr {
+  font-weight: bold;
+}
+Form Form.Item {
+  margin-left: 20px;
 }/*# sourceMappingURL=main.css.map */

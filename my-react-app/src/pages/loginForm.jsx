@@ -2,36 +2,36 @@ import React, { useState } from 'react';
 import "../scss/main.css";
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import {login} from "../slice/authSlice";
+import userLogin from "../reduxSaga/userAuthSaga";
+import{setLoginFailure,setLoginSuccess} from '../slice/authSlice';
 import { useNavigate } from 'react-router-dom';
-
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checked, setChecked] = useState(true);
+  const [remember, setRemember] = useState(true);  
   const dispatch = useDispatch();
-  const error=useSelector(state=>state.auth.error);
-  const isLogedIn=useSelector(state=>state.auth.isLogedIn);
+  const isLoggedIn = useSelector(state => state.isLoggedIn); 
+  const error = useSelector(state => state.error); 
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(userLogin({ email, password, remember })); 
   }
-  const navigate = useNavigate();
-  if (isLogedIn) {
-    console.log('ok');
-  navigate(-1);
-  return null;
-}
-// const onFinish = (values) => {
-//   console.log('Success:', values);
-const onFinishFailed = (error) => {
-  console.log('Failed:', error);
-};
 
+ if(error){
+  return {error}
+ }
+
+  if (isLoggedIn) { 
+    navigate(-1);
+    return null;
+  }
   return (
-
-    <Form 
+<div klassname='formContainer'>
+ 
+    <Form className="form"
     name="basic"
     labelCol={{
       span: 8,
@@ -39,17 +39,18 @@ const onFinishFailed = (error) => {
     wrapperCol={{
       span: 16,
     }}
-    style={{
-    
-    }}
     initialValues={{
       remember: true,
     }}
-    onFinish={navigate}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
+
     >
+      <Form.Item className='formHeaedr'
+        label='Authentication:'
+        >
+      </Form.Item>
+      
       <Form.Item
+      
         label="Username"
         name="username"
         value={email}
@@ -81,8 +82,8 @@ const onFinishFailed = (error) => {
 
       <Form.Item
         name="remember"
-        value={checked}
-        onChange={(e) => setChecked(e.target.value)}
+        value={remember}
+        onChange={(e) => setRemember(e.target.value)}
 
         wrapperCol={{
           offset: 8,
@@ -99,10 +100,11 @@ const onFinishFailed = (error) => {
         }}
       >
         <Button type="primary" htmlType="submit" onClick={handleLogin}>
-          Submit
+          Log in
         </Button>
       </Form.Item>
     </Form>
+    </div>
   )
 };
 

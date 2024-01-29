@@ -3,6 +3,9 @@ const roomsDataSlice=createSlice({
     name:'data',
     initialState:{
         data: [],
+        currentRoom:{},
+        showItems:[],
+        isShowRoomInfo:false,
         loading: false,
         error: null,
     },
@@ -19,7 +22,11 @@ state.error=null;
             state.data=[];
             state.error=action.payload;
         },
+        openModalRoomsInfo: (state, action) => {
+            state.currentRoom = state.showItems.find(item => item.id === action.payload);
+            state.isShowRoomInfo = true;
+        },
     },
 });
-export const {getDataStart,getDataSuccess,getDataFailure}=roomsDataSlice.actions;
+export const {getDataStart,getDataSuccess,getDataFailure, openModalRoomsInfo}=roomsDataSlice.actions;
 export default roomsDataSlice.reducer;
