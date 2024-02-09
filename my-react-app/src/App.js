@@ -11,7 +11,7 @@ const App = () =>{
     <Header/>
     <Routes>
       <Route path='/' element={<Homepage/>}/>
-      <Route path='/loginForm' element={<LoginForm/>}/>
+      {/* <Route path='/loginForm' element={<LoginForm/>}/> */}
       <Route path='*' element={<ErrorPage/>}/>
     </Routes>
     </div>

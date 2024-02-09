@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import "../scss/main.css";
-import { connect ,useDispatch} from "react-redux";
-import { fetchData } from '../reduxSaga/dataSaga'
-import { getDataStart, getDataSuccess, getDataFailure,openModalRoomsInfo } from '../slice/roomsDataSlice'
+import { useSelector, useDispatch} from "react-redux";
+import { getDatasFetch } from '../slice/roomsDataSlice'
 import { Layout, Button, Checkbox, Table } from 'antd';
 
-const Homepage = ({ data, loading, error, fetchData }) => {
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-  const { Content } = Layout;
+const Homepage = () => {
+  const data=useSelector(state=>state.data.data)
   const dispatch=useDispatch();
+  useEffect(() => {
+    dispatch({type:'data/getDatasFetch'});
+  }, []);
+  const { Content } = Layout;
   const columns = [
     { title: 'Number', dataIndex: 'number' },
     { title: 'Type', dataIndex: 'type' },
@@ -21,7 +21,7 @@ const Homepage = ({ data, loading, error, fetchData }) => {
       title: '',
       dataIndex: 'button',
       render: (_, id) => (
-        <Button type="primary" onClick={() => dispatch(openModalRoomsInfo(id))}>More Information</Button>
+        <Button type="primary" >More Information</Button>
       ),
     }
   ];
@@ -30,13 +30,13 @@ const Homepage = ({ data, loading, error, fetchData }) => {
     console.log('params', pagination, filters, sorter, extra);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
   return (
     <Layout>
@@ -52,17 +52,4 @@ const Homepage = ({ data, loading, error, fetchData }) => {
     </Layout>
   );
 }
-const mapStateToProps = state => ({
-  data: state.data.data,
-  loading: state.data.loading,
-  error: state.data.error
-});
-const mapDispatchToProps = {
-  fetchData,
-  getDataStart,
-  getDataSuccess,
-  getDataFailure,
-};
-
-// Обертываем компонент Homepage в connect и передаем ему mapStateToProps и mapDispatchToProps
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
+export default Homepage;
