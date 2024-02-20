@@ -7,11 +7,11 @@ import { Layout, Button, Checkbox, Table} from 'antd';
 
 import { Link } from "react-router-dom";
 const columns = [
-  { 
+  { key:'id',
     title: 'Number', 
     dataIndex: 'number' 
   },
-  { 
+  { key:'id',
     title: 'Type', 
     dataIndex: 'type',
     filters: [ 
@@ -21,7 +21,7 @@ const columns = [
     ],
     onFilter: (value, record) => record.type === value
   },
-  {
+  {key:'id',
     title: 'Occupancy',
     dataIndex: 'occupancy',
     filters: [ 
@@ -32,12 +32,12 @@ const columns = [
    
     onFilter: (value, record) => record.occupancy === value  
   },
-  {
+  {key:'id',
     title: 'Price', 
     dataIndex: 'price', 
     sorter: (a, b) => a.price - b.price 
   },
-  {
+  {key:'id',
     title: 'Guest',
     dataIndex: 'guest',
     filters: [
@@ -53,7 +53,7 @@ const columns = [
       }
     }
   },
-  {
+  {key:'id',
     title: '',
     dataIndex: 'id',
     render: (id) => (
@@ -79,7 +79,7 @@ const Homepage = () => {
   }, []);
 
   const freeRoomsOnly = useSelector(state => state.filter.freeRoomsOnly);
-  const filters = useSelector(state => state.filter.filters);
+  const filters = useSelector(state => state.filter);
 
   const handleFilterFreeRoom = (e) => {
     dispatch({ type: 'filter/setFreeRoomsOnly', payload: e.target.checked });
@@ -123,15 +123,16 @@ const Homepage = () => {
     dispatch(setFilters(filters))
     console.log('params', pagination, filters, sorter, extra);
   };
-
+  
   return (
-    <Layout>
+      <Layout >
       <Content className="content">
         <div>
           <Button type="text" onClick={resetAllFilters}>Clear all filters</Button>
           <Checkbox onChange={handleFilterFreeRoom}>Free rooms only</Checkbox>
         </div>
-        <div className='tableContainer'>
+        <div className='tableContainer' key={data.id}>
+        
           <Table 
             columns={columns} 
             dataSource={data} 
@@ -146,10 +147,15 @@ const Homepage = () => {
             }} 
             filters={filters} 
           />
+          ))
+       }
+     
         </div>
       </Content>
     </Layout>
+
   );
 }
+
 
 export default Homepage;

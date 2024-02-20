@@ -5,7 +5,7 @@ import Header from './pages/header';
 import Homepage from './pages/home';
 import ErrorPage from './pages/errorPage';
 import './firebase/firebase';
-import RoomPage from './pages/roomsPage';
+import RoomPage from './pages/roomPage';
 const App = () =>{
   return(
    <div className='container'>

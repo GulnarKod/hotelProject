@@ -1,5 +1,5 @@
 import{put, takeEvery} from 'redux-saga/effects';
-import{getCurrentItemFetch, getCurrentItemSuccess, getCurrentItemFailure} from '../slice/roomsDataSlice';
+import{getCurrentItemFetch, getCurrentItemSuccess, getCurrentItemFailure} from '../slice/roomSlice';
 import {db} from '../firebase/firebase';
 import{getDoc, doc} from 'firebase/firestore';
 
