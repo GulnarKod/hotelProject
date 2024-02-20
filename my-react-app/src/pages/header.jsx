@@ -1,14 +1,16 @@
 import React from "react";
 import "../scss/main.css";
-import {Navigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import {logoutUser}from '../slice/authSlice';
 import logo from '../logo/logo.png'
+
 const Header = () => {
     const dispatch = useDispatch();
+    // const history = useHistory();
     const handleLogOut = () => {
-        dispatch(logoutUser());
+        dispatch({type: 'logout'});
+       console.log('logout');
     }
+    
     return(
 
         <header className="header" >
@@ -18,7 +20,7 @@ const Header = () => {
             </div>
             <div className="logOutBtn">
                 <img src="#" alt="users photo" />
-                <button className="btn" onClick={handleLogOut}>Log Out</button>
+                <button className="btn" onClick={handleLogOut} >Log Out</button>
             </div>
         </header>
     )

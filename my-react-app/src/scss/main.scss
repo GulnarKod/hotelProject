@@ -43,7 +43,9 @@
     }
 
 }
-
+.container{
+  background-color: #dee2e1;  
+}
 .content {
     margin-left: 50px;
     margin-right: 50px;
@@ -68,6 +70,7 @@
 
 
     Table {
+    
         height: max-content;
         margin-top: 50px;
         border-radius: 0;
@@ -75,7 +78,7 @@
         Button {
             background-color: #05a0c7;
         }
-
+      
     }
 
     .ant-pagination {
@@ -92,8 +95,37 @@
         font-size: 20px;
     }
 }
+.roomPageContainer{
+    background-color: #dee2e1; 
 
-Form{
+    margin-left: 30px;
+    margin-right: 30px;
+    .homeButton{
+        color:#569ef6;
+        background-color: #dee2e1;  
+        font-weight: bold;
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
+    .roomsDescriptionBlock{
+        display: flex;
+        flex-wrap: nowrap;
+    }
+.ant-carusel{
+    width: 50%;
+    width: 500px;
+}
+    .image_carusel{
+        width: 50%;
+    }
+    .roomDescriptionItem{
+      
+        width: 25%;
+    }
+}
+
+
+.antd-form{
     display: block;
     position: fixed;
     top: 50%;
@@ -101,15 +133,17 @@ Form{
     transform: translate(-50%, -50%);
     height: 300px;
     max-height: 100%;
-    width: max-content;
     width: 500px;
     max-width: 100%;
 
-background-color: hsl(236, 54%, 58%);
-.formHeaedr{
+.antd-form-header{
     font-weight: bold; 
 }
-Form.Item{
-    margin-left: 20px;
+.antd-form-checkbox{
+    // display: flex;
+    // justify-content:baseline;
+    // width: 500px;
+    align-items:start;
 }
+
 }
