@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { Button, Carousel } from "antd";
+import "../scss/main.css";
 import { HomeOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -31,12 +32,13 @@ const RoomPage = () => {
             <div className='room-page-description-block'>
                 {currentItem ? ( 
                     <div>
-                        <div className="ant-carousel">
+                        <div className="room-page-carusel">
                             <Carousel afterChange={onChange}>
                                 {currentItem.gallery.map((image, imageIndex) => (
                                     <div className= "slick-slide" key={imageIndex}>
-                                        <img src={image} alt={`Slide ${image.Index}`} style={{ width: '50%', maxHeight: '400px' }} />
+                                        <img src={image} alt={`Slide ${image.Index}`} style={{ width: '50%', maxHeight: '100px' }} />
                                     </div>
+                                    
 ))}
                             </Carousel>
                         </div> 

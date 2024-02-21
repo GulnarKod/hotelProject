@@ -1,85 +1,86 @@
 import React, { useEffect, useState } from "react";
-// import 'antd/dist/antd.css';
-import "../scss/main.css";
+import { Layout, Button, Checkbox, Table } from 'antd'
+
 import { useSelector, useDispatch } from "react-redux";
-import {setFreeRoomsOnly, setFilters, resetFilters} from '../slice/filterSlice'
-import { Layout, Button, Checkbox, Table} from 'antd';
+import { setFilters, resetFilters } from '../slice/filterSlice'
 
 import { Link } from "react-router-dom";
-const columns = [
-  { key:'id',
-    title: 'Number', 
-    dataIndex: 'number' 
-  },
-  { key:'id',
-    title: 'Type', 
-    dataIndex: 'type',
-    filters: [ 
-      { text: 'standard', value: 'standard' },
-      { text: 'suite', value: 'suite' },
-      { text: 'deluxe', value: 'deluxe' }
-    ],
-    onFilter: (value, record) => record.type === value
-  },
-  {key:'id',
-    title: 'Occupancy',
-    dataIndex: 'occupancy',
-    filters: [ 
-      { text: '2', value: 2 },
-      { text: '3', value: 3 },
-      { text: '4', value: 4 }
-    ],
-   
-    onFilter: (value, record) => record.occupancy === value  
-  },
-  {key:'id',
-    title: 'Price', 
-    dataIndex: 'price', 
-    sorter: (a, b) => a.price - b.price 
-  },
-  {key:'id',
-    title: 'Guest',
-    dataIndex: 'guest',
-    filters: [
-      { text: 'Not empty', value: 'not_empty' },
-      { text: 'Empty', value: 'empty' }
-    ],
-   
-    onFilter: (value, record)=> {
-      if (value === 'empty') {
-        return !record.guest;
-      } else if (value === 'not_empty') {
-        return !!record.guest;
-      }
-    }
-  },
-  {key:'id',
-    title: '',
-    dataIndex: 'id',
-    render: (id) => (
-      
-      <Link to={`/roomPage/${id}`}>
-        <Button type="primary">More Information</Button>
-      </Link>
-    ),
-  }
-];
+import "../scss/main.css";
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.data.loading);
   const error = useSelector(state => state.data.error);
- 
   const data = useSelector(state => state.data.data);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [filteredInfo, setFilteredInfo] = useState({});
 
+  const columns = [
+    { key:'number',
+      title: 'Number', 
+      dataIndex: 'number' ,
+      style: {with: '20%'},
+    },
+    { key:'type',
+      title: 'Type', 
+      dataIndex: 'type',
+      filters: [ 
+        { text: 'standard', value: 'standard' },
+        { text: 'suite', value: 'suite' },
+        { text: 'deluxe', value: 'deluxe' }
+      ],
+      // filteredValue: filteredInfo.type || null,
+      onFilter: (value, record) => record.type === value
+    },
+    {key:'occupancy',
+      title: 'Occupancy',
+      dataIndex: 'occupancy',
+      filters: [ 
+        { text: '2', value: 2 },
+        { text: '3', value: 3 },
+        { text: '4', value: 4 }
+      ],
+      // filteredValue: filteredInfo.occupancy || null,
+      onFilter: (value, record) => record.occupancy === value  
+    },
+    {key:'price',
+      title: 'Price', 
+      dataIndex: 'price', 
+      sorter: (a, b) => a.price - b.price 
+    },
+    {key:'guest',
+      title: 'Guest',
+      dataIndex: 'guest',
+      filters: [
+        { text: 'Not empty', value: 'not_empty' },
+        { text: 'Empty', value: 'empty' }
+      ],
+      // filteredValue: filteredInfo.guest || null,
+      onFilter: (value, record)=> {
+        if (value === 'empty') {
+          return !record.guest;
+        } else if (value === 'not_empty') {
+          return !!record.guest;
+        }
+      }
+    },
+    {key:'id',
+      title: '',
+      dataIndex: 'id',
+      render: (id) => (
+        
+        <Link to={`/roomPage/${id}`}>
+          <Button type="primary">More Information</Button>
+        </Link>
+      ),
+      style: { backgroundColor: 'lightblue' }
+    
+    }
+  ];
   useEffect(() => {
-    dispatch({ type: 'getDatasFetch' })
-  }, []);
-
-  const freeRoomsOnly = useSelector(state => state.filter.freeRoomsOnly);
-  const filters = useSelector(state => state.filter);
+    dispatch({ type: 'getDatasFetch' });
+  }, [dispatch]);
 
   const handleFilterFreeRoom = (e) => {
     dispatch({ type: 'filter/setFreeRoomsOnly', payload: e.target.checked });
@@ -87,30 +88,22 @@ const Homepage = () => {
 
   const resetAllFilters = () => {
     dispatch(resetFilters());
+    dispatch({ type: "filter/setFreeRoomsOnly", payload: false });
+    setFilteredInfo({}); // сброс фильтров
   };
-  
-  // Фильтруем данные на основе значения freeRoomsOnly
-  const filteredData = data.filter(item => {
-    if (freeRoomsOnly) {
-      return !item.guest; // Возвращаем только свободные номера, если установлен флажок
-    }
 
-    // Возвращаем записи, которые соответствуют всем фильтрам
-    return Object.keys(filters).every(key => {
-      if (!filters[key]) return true;
-      if (key === 'guest' && filters[key] === 'empty') {
-        return !item[key];
-      }
-      if (key === 'guest' && filters[key] === 'not_empty') {
-        return !!item[key];
-      }
-      return item[key] === filters[key];
-    });
-  });
-  const { Content } = Layout;
+  const onChange = (pagination, filters, sorter, extra) => {
+    setFilteredInfo(filters); // сохранение фильтров
+    dispatch(setFilters(filters)); // отправка фильтров в Redux хранилище
+    console.log('params', pagination, filters, sorter, extra);
+  };
 
-  
-  
+  // const filteredDataToShow = data.filter(item => {
+  //   return Object.keys(filteredInfo).every(key => {
+  //     if (!filteredInfo[key]) return true;
+  //     return item[key] === filteredInfo[key];
+  //   });
+  // });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -119,23 +112,20 @@ const Homepage = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  const onChange = (pagination, filters, sorter, extra) => {
-    dispatch(setFilters(filters))
-    console.log('params', pagination, filters, sorter, extra);
-  };
-  
+  const datas=data.map(items=>({...items, key:items.id}))
   return (
       <Layout >
-      <Content className="content">
-        <div>
-          <Button type="text" onClick={resetAllFilters}>Clear all filters</Button>
+      <Layout.Content className="antd-content">
+        <div className="antd-content-header-block">
+          <Button type="primary" onClick={resetAllFilters}>Clear all filters</Button>
           <Checkbox onChange={handleFilterFreeRoom}>Free rooms only</Checkbox>
         </div>
-        <div className='tableContainer' key={data.id}>
+        <div className='antd-table-container' key={data.id}>
         
-          <Table 
+          <Table className="antd-table"
+          // rowStyle={{ height: '50px' }}
             columns={columns} 
-            dataSource={data} 
+            dataSource={datas} 
             onChange={onChange}
             pagination={{ 
               current: page,
@@ -145,13 +135,11 @@ const Homepage = () => {
                 setPageSize(pageSize); 
               }
             }} 
-            filters={filters} 
+            // filters={filters} 
           />
-          ))
-       }
      
         </div>
-      </Content>
+      </Layout.Content>
     </Layout>
 
   );

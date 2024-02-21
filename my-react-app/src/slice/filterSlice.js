@@ -15,6 +15,7 @@ const filterSlice = createSlice({
     setFilters(state, action) {
       state.filters = action.payload;
     },
+   
     resetFilters(state) {
       state.freeRoomsOnly = false;
       state.filters = {};
