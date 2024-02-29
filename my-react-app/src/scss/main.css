@@ -5,6 +5,94 @@
   box-sizing: border-box;
 }
 
+.container {
+  background-color: #dee2e1;
+  height: 100%;
+  max-height: 1080px;
+}
+
+.antd-form {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  max-height: 100%;
+  width: 500px;
+  max-width: 100%;
+}
+.antd-form .antd-form-header {
+  font-weight: bold;
+}
+.antd-form .antd-form-checkbox {
+  align-items: start;
+}
+
+.antd-content {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 100px;
+  height: 1024px;
+  width: auto;
+}
+.antd-content Button {
+  background: #0958d9;
+  /* Синий цвет фона */
+  color: #fff;
+  /* Белый цвет текста */
+  text-align: center;
+  border: none;
+  /* Убираем рамку */
+  border-radius: 0%;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.antd-content .ant-table-wrapper antd-table css-dev-only-do-not-override-1qhpsh8 {
+  height: 580px;
+}
+.antd-content .ant-table-wrapper antd-table css-dev-only-do-not-override-1qhpsh8 .ant-table-cell {
+  width: 150px;
+}
+.antd-content .ant-table-wrapper antd-table css-dev-only-do-not-override-1qhpsh8 .ant-table-row-level-0 {
+  height: 10px;
+}
+.antd-content .ant-table-wrapper antd-table css-dev-only-do-not-override-1qhpsh8 .ant-pagination {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.room-page-container {
+  background-color: #dee2e1;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.room-page-container .room-page-button {
+  color: #569ef6;
+  background-color: #dee2e1;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border: none;
+}
+.room-page-container .room-page-description-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+.room-page-container .room-page-carusel {
+  display: flex;
+  background-color: #0958d9;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 50%;
+  height: 400px;
+}
+.room-page-container .room-page-description-item {
+  flex: auto;
+  width: 25%;
+}
+
 .header {
   text-align: "center";
   color: "#fff";
@@ -35,89 +123,15 @@
   margin-left: 10px;
 }
 
-.container {
-  background-color: #dee2e1;
-}
-
-.antd-content {
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 100px;
-  height: 900px;
-}
-.antd-content Button {
-  background: #0958d9;
-  /* Синий цвет фона */
-  color: #fff;
-  /* Белый цвет текста */
+.error {
+  height: 400px;
   text-align: center;
-  border: none;
-  /* Убираем рамку */
-  border-radius: 0%;
-  margin-top: 20px;
-  margin-right: 20px;
+  margin-top: 25%;
 }
-.antd-content .antd-table-container {
-  height: -moz-max-content;
-  height: max-content;
-  margin-top: 50px;
-  border-radius: 0;
-  table-layout: fixed;
+.error h1 {
+  color: red;
 }
-.antd-content .ant-pagination {
-  justify-content: center;
-  text-align: center;
-}
-.antd-content .ant-pagination :global .ant-table-row {
-  width: -moz-fit-content;
-  width: fit-content;
-  color: aqua;
-}
-
-.errorPage {
-  text-align: center;
-  margin-top: 15%;
-}
-.errorPage p {
+.error p {
   margin-top: 10px;
   font-size: 20px;
-}
-
-.room-page-container {
-  background-color: #dee2e1;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-.room-page-container .room-page-button {
-  color: #569ef6;
-  background-color: #dee2e1;
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  border: none;
-}
-.room-page-container .room-page-description-block {
-  display: flex;
-  flex-wrap: wrap;
-}
-.room-page-container .room-page-description-block .room-page-description-item {
-  flex: auto;
-  width: 25%;
-}
-.room-page-container .antd-form {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 300px;
-  max-height: 100%;
-  width: 500px;
-  max-width: 100%;
-}
-.room-page-container .antd-form .antd-form-header {
-  font-weight: bold;
-}
-.room-page-container .antd-form .antd-form-checkbox {
-  align-items: start;
 }/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,43 @@
+.antd-content {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    height: 1024px;
+    width: auto;
+
+    Button {
+        background: #0958d9;
+        /* Синий цвет фона */
+        color: #fff;
+        /* Белый цвет текста */
+        text-align: center;
+        border: none;
+        /* Убираем рамку */
+        border-radius: 0%;
+        margin-top: 20px;
+        margin-right: 20px;
+
+    }
+
+    .ant-table-wrapper antd-table css-dev-only-do-not-override-1qhpsh8 {
+        height: 580px;
+    
+    .ant-table-cell {
+        width: 150px;
+    }
+
+    .ant-table-row-level-0 {
+        height: 10px;
+    }
+
+    .ant-pagination {
+        // display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+
+    }
+
+}
+
+}
