@@ -1,32 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
-const roomsDataSlice=createSlice({
-    name:'data',
-    initialState:{
+const roomsDataSlice = createSlice({
+    name: 'data',
+    initialState: {
         data: [],
-        currentRoom:{},
-        showItems:[],
-        isShowRoomInfo:false,
+        // currentItem: [],
+        // isShowRoomInfo: false,
         loading: false,
         error: null,
+        // isModalOpen:false,
+        // title: "",
+
+        
     },
-    reducers:{
-        getDataStart:(state)=>{
-state.loading=true;
-state.error=null;
+    reducers: {
+        getDatasFetch: (state) => {
+            state.loading = true;
+            state.error = null;
         },
-        getDataSuccess:(state,action)=>{
-            state.data=action.payload;
-            state.loading=false;
+        getDataSuccess: (state, action) => {
+            state.data = action.payload.sort((a, b) => a.number - b.number);
+            state.loading = false;
         },
-        getDataFailure:(state,action)=>{
-            state.data=[];
-            state.error=action.payload;
+        getDataFailure: (state, action) => {
+            state.data = [];
+            state.error = action.payload;
         },
-        openModalRoomsInfo: (state, action) => {
-            state.currentRoom = state.showItems.find(item => item.id === action.payload);
-            state.isShowRoomInfo = true;
-        },
+
+        // getCurrentItemFetch: (state) => {
+        //     state.loading = true;
+        //     state.error = null;
+        // },
+        // getCurrentItemSuccess: (state, action) => {
+        //     state.currentItem = action.payload;
+        //     state.isShowRoomInfo = true;
+        // },
+
+        // getCurrentItemFailure: (state, action) => {
+        //     state.loading = false;
+        //     state.error = action.payload;
+        // },
+
+
     },
 });
-export const {getDataStart,getDataSuccess,getDataFailure, openModalRoomsInfo}=roomsDataSlice.actions;
+export const { getDatasFetch, getDataSuccess, getDataFailure} = roomsDataSlice.actions;
 export default roomsDataSlice.reducer;

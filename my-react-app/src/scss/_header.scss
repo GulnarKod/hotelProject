@@ -1,0 +1,40 @@
+
+.header {
+    text-align: 'center';
+    color: '#fff';
+    height: 64px;
+    line-height: 64px;
+
+    background-color: #212343;
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+        height: 64px;
+        justify-content: flex-start;
+        margin-left: 50px;
+
+        img {
+
+            height: 40px;
+            margin-top: 10px;
+            opacity: 0.8;
+
+        }
+    }
+
+    .logOutBtn {
+        img {
+            height: 40px;
+        }
+
+        .btn {
+            background-color: #212343;
+            color: aliceblue;
+            border: 0;
+            margin-right: 30px;
+            margin-left: 10px;
+        }
+    }
+
+}

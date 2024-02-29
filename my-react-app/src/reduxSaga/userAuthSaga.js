@@ -1,25 +1,32 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { setLoginSuccess, setLoginFailure } from '../slice/authSlice';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
-function* userLogin(action) {
-  try {
-    const { email, password } = action.payload;
-    const auth = getAuth(); // Вызываем getAuth только один раз
-    const userCredential = yield call(signInWithEmailAndPassword, auth, email, password);
-    const user = userCredential.user;
+import { put, takeEvery } from 'redux-saga/effects';
+import { fetchLogin,loginSuccess, loginFailure,logout } from '../slice/authSlice';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+function* userLogin(action){
+try{
+  yield put(fetchLogin());
+  const{email, password}= action.payload;
+const auth= getAuth();
+    const userCredential=yield signInWithEmailAndPassword(auth, email, password);
+   console.log(userCredential)
+    const user= userCredential;
+    yield put(loginSuccess(user)); 
     
-    yield put(setLoginSuccess({
-      email: user.email,
-      id: user.uid // Включаем только email и id в состояние
-    }));
   } catch (error) {
-    yield put(setLoginFailure(error.message));
+    const errorMessage = error.message;
+    yield put(loginFailure(errorMessage)); 
   }
+}
+function* userLogout(){
+
+  const authentification = getAuth();
+  yield signOut(authentification);
+
+    yield put(logout());
 }
 
 function* userAuthSaga() {
-  yield takeLatest('auth/login', userLogin);
+  yield takeEvery('login', userLogin);
+  yield takeEvery ('logout', userLogout);
 }
 
 export default userAuthSaga;
